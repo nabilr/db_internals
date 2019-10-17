@@ -1,13 +1,16 @@
-## Welcome to My DataBase Internals Pages.
+## Welcome to My DataBase Internals Page.
 
 ## Storage:
-DataBase data storage could be either raw wise or clomn wise. Each version has its own advantage.
 
-
+DataBase data storage could be either row or clomn wise storage model. Each version has its own advantage.
 
 ## MonetDB
 
 MonetDB is an open-source column-oriented database management system.
+
+#[Monetdb java client program](https://www.monetdb.org/Documentation/Manuals/SQLreference/Programming/JDBC)
+
+#[Monet User guid](https://www.monetdb.org/book/export/html/202)
 
 ### MonetDB MAL
 MonetDB supports SQl(Standard Query Language). Every SQL will be translated into MonetDB Assembly Lnaguage, which is low language to apply relational algebra efficiently.
@@ -32,7 +35,7 @@ sql>select count(*) from test;
 1 tuple
 sql>
 ```
-Updated the column table using MAL instrctions. 
+Updated the column c of table test using MAL instrctions. See the amazing performance from monetdb on coulumn updates
 
 ```markdown
 >>time cat mal.ins |  mclient  -dmy-first-db -l mal
@@ -40,6 +43,12 @@ real	0m0.226s
 user	0m0.008s
 sys	0m0.000s
 
+````
+
+MAL instruction
+
+
+```markdown
 >> cat mal.ins 
 
 sql.init();
