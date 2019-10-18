@@ -74,7 +74,7 @@ sql>select * from test where a = 2;
 1 tuple
 
 ```
-Time to computer 4th column using sql query.
+Time it takes to compute 4th column using sql query.
 
 ```markdown
 time echo "update test set d=a+b+c;" | mclient  -dmy-first-db -l sql 
@@ -85,3 +85,29 @@ user	0m0.016s
 sys	0m0.000s
 
 ```
+
+Time it takes to compute 4th column using MAL.
+
+```markdown
+time cat in  | mclient  -dmy-first-db -l mal
+
+real	0m0.273s
+user	0m0.009s
+sys	0m0.001s
+
+>>cat in
+sql.init();
+s:int := sql.mvc();
+test_a:bat[:int] := sql.bind(s, "sys", "test","a",0);
+test_b:bat[:int] := sql.bind(s, "sys", "test","b",0);
+test_c:bat[:int] := sql.bind(s, "sys", "test","c",0);
+
+
+test_oid:bat[:oid] := sql.tid(s, "sys", "test");
+
+new_column1 := batcalc.+(test_a, test_b);
+new_column2 := batcalc.+(new_column1, test_c);
+sql.update(s, "sys", "test", "c", test_oid, new_column2);
+
+```
+
