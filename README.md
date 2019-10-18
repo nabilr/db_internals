@@ -74,3 +74,14 @@ sql>select * from test where a = 2;
 1 tuple
 
 ```
+Time to computer 4th column using sql query.
+
+```markdown
+time echo "update test set d=a+b+c;" | mclient  -dmy-first-db -l sql 
+13901600 affected rows
+
+real	0m3.443s
+user	0m0.016s
+sys	0m0.000s
+
+```
